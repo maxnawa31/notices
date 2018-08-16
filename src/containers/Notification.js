@@ -1,5 +1,7 @@
 import Notification from '../components/Notification';
 import { connect } from 'react-redux';
+import { notifications } from '../store/textTransform'
+import { removeNotification } from '../store/textTransform'
 
 const mapStateToProps = state => ({
   mode: state.notifications.mode,
@@ -7,4 +9,4 @@ const mapStateToProps = state => ({
   isLoading: state.textTransform.isLoading
 })
 
-export default connect(mapStateToProps, null)(Notification);
+export default connect(mapStateToProps, {removeNotification})(Notification);

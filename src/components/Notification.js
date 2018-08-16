@@ -5,6 +5,8 @@ export default class Notification extends Component {
   state = {
     message: false
   }
+
+
   render() {
     const NotificationStyle = {
       height: '100%',
@@ -22,10 +24,27 @@ export default class Notification extends Component {
     }else {
       notificationText = ''
     }
+
+    // if(this.props.color && this.props.mode) {
+
+    // }else {
+    //   this.setState({message: true})
+    // }
+
     return (
-      <div style = {NotificationStyle} >
-      { notificationText }
+      <div>
+        {
+          this.props.color && this.props.mode
+          ?
+          <div style = {NotificationStyle} >
+                { notificationText }
+                <button onClick = {this.props.removeNotification}>X</button>
+          </div>
+          :
+        " "
+      }
       </div>
+
     )
   }
 }

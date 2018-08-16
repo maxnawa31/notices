@@ -10,6 +10,8 @@ const UPPERCASE_ENDPOINT = '/api/uppercase'
 const UPPERCASE = 'uppercase'
 const LOWERCASE = 'lowercase'
 
+const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION'
+
 const transformText = (input, mode = LOWERCASE) => dispatch => {
     mode = mode.toLowerCase()
     const endpoint = mode === UPPERCASE ? UPPERCASE_ENDPOINT : LOWERCASE_ENDPOINT
@@ -20,8 +22,13 @@ const transformText = (input, mode = LOWERCASE) => dispatch => {
         .catch(err => dispatch({ type: TRANSFORM_VALUE_ERROR, payload: err }))
 }
 
+
 export const transformToLowerCase = input => transformText(input)
 export const transformToUpperCase = input => transformText(input, UPPERCASE)
+
+export const removeNotification = () => dispatch => {
+    dispatch({type:REMOVE_NOTIFICATION, payload:''})
+}
 
 const initialState = {
     transformedValue: '',
@@ -41,12 +48,13 @@ export default function textTransform(state = initialState, { type, payload }) {
     }
 }
 
-const notificationState = {
+const notificationInitialState = {
     mode: null,
     color: null
 }
 
-export function notifications(state = notificationState, { type, payload }) {
+export function notifications(state = notificationInitialState, { type, payload }) {
+    console.log(type)
     switch (type) {
         case TRANSFORM_VALUE_LOAD:
             return { ...state, mode: payload, color : 'grey' }
@@ -54,6 +62,8 @@ export function notifications(state = notificationState, { type, payload }) {
             return { ...state, color: 'green' }
         case TRANSFORM_VALUE_ERROR:
             return { ...state, color: 'red' }
+        case REMOVE_NOTIFICATION:
+            return notificationInitialState
         default: return state
     }
 }
