@@ -4,9 +4,8 @@ import React, { Component } from 'react';
 export default class Notification extends Component {
 
   componentDidUpdate() {
-
-    if(this.props.color === 'green' || this.props.color === 'grey') {
-      setTimeout(this.props.removeNotification,5000)
+    if(this.props.color === 'green' || this.props.color === 'red') {
+      setTimeout(this.props.removeNotification,3000)
     }
   }
   render() {
