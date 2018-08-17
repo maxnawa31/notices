@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 
 
 export default class Notification extends Component {
-  state = {
-    message: false
+
+  componentDidUpdate() {
+
+    if(this.props.color === 'green' || this.props.color === 'grey') {
+      setTimeout(this.props.removeNotification,5000)
+    }
   }
-
-
   render() {
-    const NotificationStyle = {
+    const notificationStyle = {
       height: '100%',
       width: '20%',
       backgroundColor: this.props.color !== null ? `${this.props.color}` : 'white'
@@ -25,18 +27,13 @@ export default class Notification extends Component {
       notificationText = ''
     }
 
-    // if(this.props.color && this.props.mode) {
-
-    // }else {
-    //   this.setState({message: true})
-    // }
 
     return (
       <div>
         {
           this.props.color && this.props.mode
           ?
-          <div style = {NotificationStyle} >
+          <div style = {notificationStyle} >
                 { notificationText }
                 <button onClick = {this.props.removeNotification}>X</button>
           </div>

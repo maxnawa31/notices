@@ -27,7 +27,7 @@ export const transformToLowerCase = input => transformText(input)
 export const transformToUpperCase = input => transformText(input, UPPERCASE)
 
 export const removeNotification = () => dispatch => {
-    dispatch({type:REMOVE_NOTIFICATION, payload:''})
+    dispatch({ type:REMOVE_NOTIFICATION })
 }
 
 const initialState = {
@@ -54,7 +54,6 @@ const notificationInitialState = {
 }
 
 export function notifications(state = notificationInitialState, { type, payload }) {
-    console.log(type)
     switch (type) {
         case TRANSFORM_VALUE_LOAD:
             return { ...state, mode: payload, color : 'grey' }
